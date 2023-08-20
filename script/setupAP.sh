@@ -59,7 +59,7 @@ countryCodeArray=('AD', 'AE', 'AF', 'AG', 'AI', 'AL', 'AM', 'AO', 'AQ', 'AR', 'A
 'TT', 'TV', 'TW', 'TZ', 'UA', 'UG', 'UM', 'US', 'UY', 'UZ', 'VA', 'VC', 'VE', 'VG', 'VI', 'VN', 'VU', 'WF', 'WS',
 'YE', 'YT', 'ZA', 'ZM', 'ZW')
 
-workDir="/home/pi"
+workDir="/home/cardmed"
 installDir="$workDir/network-setup"
 logDir="$installDir/log"
 execDir="$installDir/bin"
@@ -88,7 +88,7 @@ wlanInterfaceNameValid=true
 wlanInterfaceNameDefault="wlan0"
 wlanInterfaceName="$wlanInterfaceNameDefault"
 apInterfaceName="uap0"
-hostNameDefault="raspberrypi"
+hostNameDefault="cardmed"
 hostName="$hostNameDefault"
 
 # FIX: for https://github.com/idev1/rpihotspot/issues/12#issuecomment-605552834
