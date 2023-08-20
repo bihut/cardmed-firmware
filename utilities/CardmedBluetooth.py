@@ -10,35 +10,23 @@ class CardmedBluetooth:
         super().__init__()
         self.bluetoothState=True
         self.isOnCarmed = Utils.checkIfCardmedDevice()
-    def turnOnBluetooth(self):
-        try:
-            # Run the bluetoothctl command to turn on Bluetooth
-            #subprocess.run(["sudo","-A", "bluetoothctl", "power", "on"], check=True)
-            if not self.isOnCarmed:
-                password = getpass("Please enter your password: ")
-                proc = subprocess.Popen("sudo -S bluetoothctl power on".split(), stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-                proc.communicate(password.encode())
-            else:
-                subprocess.run(["bluetoothctl", "power", "on"], check=True)
-            print("Bluetooth turned on.")
-            self.bluetoothState = True
-        except subprocess.CalledProcessError as e:
-            print("Error turning on Bluetooth:", e)
-    def turnOffBluetooth(self):
+
+    def bluetoothState(self,state="on"):
         try:
             # Run the bluetoothctl command to turn on Bluetooth
             #password = getpass("Please enter your password: ")
             #subprocess.run(["sudo","-A", "bluetoothctl", "power", "off"], check=True)
             if not self.isOnCarmed:
                 password = getpass("Please enter your password: ")
-                proc = subprocess.Popen("sudo -S bluetoothctl power off".split(), stdin=subprocess.PIPE,
+                aux = "sudo -S bluetoothctl power "+state
+                proc = subprocess.Popen(aux.split(), stdin=subprocess.PIPE,
                                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
                 proc.communicate(password.encode())
             else:
-                subprocess.run(["bluetoothctl", "power", "off"], check=True)
+                subprocess.run(["bluetoothctl", "power", state], check=True)
             self.bluetoothState = False
         except subprocess.CalledProcessError as e:
-            print("Error turning off Bluetooth:", e)
+            print("Error changing Bluetooth state to :",state,"  ", e)
     def listDevices(self):
         '''self.devices = bluetooth.discover_devices(duration=1, lookup_names=True, lookup_class=True)
 
@@ -63,3 +51,20 @@ class CardmedBluetooth:
                 pass
         return devices
 
+    def setPairable(self,state="on"):
+        try:
+            subprocess.run(["bluetoothctl", "pairable", state], check=True)
+            print("Device pairable ",state)
+            return True
+        except:
+            pass
+        return False
+
+    def setDiscoverable(self,state="on"):
+        try:
+            subprocess.run(["bluetoothctl", "discoverable", state], check=True)
+            print("Device discoverable ", state)
+            return True
+        except:
+            pass
+        return False
