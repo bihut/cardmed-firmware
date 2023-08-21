@@ -1,0 +1,8 @@
+{
+  "url": "localhost",
+  "port": 27017,
+  "username": "angel",
+  "password": "123456",
+  "collection_data": "cardmed_data",
+  "collection_configuration": "cardmed_configuration"
+}
