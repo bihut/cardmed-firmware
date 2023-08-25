@@ -26,7 +26,6 @@ def getAllConfigurations():
 def getData(starttime,endtime):
 	pass
 
-
 @app.route("/data/realtime",methods=["GET"])
 def getDataRealTime():
 	pass
