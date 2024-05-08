@@ -1,0 +1,53 @@
+{
+	"trial_id": "",
+	"type_output": "csv",
+	"language": "es",
+	"output_path_folder": "/home/bihut/dev/Proyectos/CardMed/experiment_output/",
+	"custom_label": "ge_b105",
+	"experiment_label": "bresenham_absolute",
+	"company": "ge",
+	"model": "b105",
+    "input_path": "/home/bihut/Datasets_NRP_pro/Datasets/2.ecg/GE B105_B125",
+	"parameters": [
+		{
+			"tag": "ECG",
+			"card": "S",
+			"type": "number",
+			"search": "bresenham",
+			"deep": -1
+		},
+		{
+			"tag": "sp",
+			"card": "SE",
+			"type": "number",
+			"search": "bresenham",
+			"deep": -1
+		},
+		{
+			"tag": "resp",
+			"card": "SE",
+			"type": "number",
+			"search": "bresenham",
+			"deep": -1
+		},
+		{
+			"tag": "SYS",
+			"card": "S",
+			"type": "number",
+			"search": "bresenham",
+			"deep": -1
+		},
+		{
+			"tag": "DIA",
+			"card": "S",
+			"type": "number",
+			"search": "bresenham",
+			"deep": -1
+		}
+	],
+	"parameters_relative": [
+	]
+
+
+
+}
