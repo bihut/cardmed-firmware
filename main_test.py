@@ -11,5 +11,6 @@ res=card.getDataByTime(starttime=1692608000,endtime=1692609999,configuration="as
 print(res)
 '''
 
-lista=Services.connectedNetwork()
-print(lista)
+res,state=Services.connectWifi("Redmi Note 8","7988555e218b")
+print("res",res)
+print("state",state)

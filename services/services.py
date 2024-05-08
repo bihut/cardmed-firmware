@@ -1,5 +1,9 @@
+import os
 import re
 import subprocess
+
+import netifaces as netifaces
+#import pyiface as pyiface
 
 
 class Services:
@@ -66,7 +70,7 @@ class Services:
         except subprocess.CalledProcessError:
             print("Error al encender el adaptador Bluetooth")
     @staticmethod
-    def connectedNetwork():
+    def getConnectedNetwork():
         try:
             # Obtener la configuración de la interfaz de red
             output = subprocess.check_output(["iwgetid", "-r"])
@@ -80,37 +84,25 @@ class Services:
 
         except subprocess.CalledProcessError:
             return None#"Error al obtener la red WiFi conectada"
+
     @staticmethod
-    def delete_connected_network(ssid):
-        # Ruta al archivo de configuración de wpa_supplicant
-        config_file = "/etc/wpa_supplicant/wpa_supplicant.conf"
-
+    def runAndWait(command):
         try:
-            # Leer el contenido del archivo de configuración
-            with open(config_file, "r") as f:
-                lines = f.readlines()
-
-            # Buscar la sección de la red a eliminar
-            start_idx = None
-            end_idx = None
-            for i, line in enumerate(lines):
-                if ssid in line:
-                    start_idx = i
-                if start_idx is not None and "}" in line:
-                    end_idx = i
-                    break
-
-            if start_idx is not None and end_idx is not None:
-                # Eliminar las líneas correspondientes a la red
-                del lines[start_idx:end_idx + 1]
-
-                # Escribir el archivo actualizado
-                with open(config_file, "w") as f:
-                    f.writelines(lines)
-
-                print(f"Red '{ssid}' eliminada del archivo de configuración")
-            else:
-                print(f"No se encontró la red '{ssid}' en el archivo de configuración")
-
-        except FileNotFoundError:
-            print("El archivo de configuración de wpa_supplicant no se encontró")
+            process = subprocess.Popen(command, shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+            stdout, stderr = process.communicate()
+            #process.wait()
+            #process.returncode, stdout.decode(), stderr.decode()
+            var = process.returncode
+            if var==0:
+                return True,""
+            return False,stdout.decode()+" -- "+stderr.decode()
+        except Exception as e:
+            return False, str(e)
+    @staticmethod
+    def connectWifi(ssid, password):
+        state,msg=Services.runAndWait("sudo ifconfig wlan0 up")
+        if state:
+            state, msg = Services.runAndWait(
+                "sudo raspi-config nonint do_wifi_ssid_passphrase '{}' '{}'".format(ssid, password))
+            Services.runAndWait("sudo ifconfig wlan0 up")
+        return state,msg
