@@ -37,7 +37,7 @@ class Services:
     def turnOffWifi(iface="wlan0"):
         try:
             # Desactivar la interfaz de red
-            subprocess.run(["sudo", "ifconfig", iface, "down"])
+            subprocess.run(["sudo", "nmcli", "radio","wifi", "off"])
             #print("Desconexión exitosa")
             return True
         except subprocess.CalledProcessError:
@@ -48,7 +48,7 @@ class Services:
     def turnOnWifi(iface="wlan0"):
         try:
             # Activar la interfaz de red
-            subprocess.run(["sudo", "ifconfig", iface, "up"])
+            subprocess.run(["sudo", "nmcli", "radio","wifi", "on"])
             return True
 
         except subprocess.CalledProcessError:

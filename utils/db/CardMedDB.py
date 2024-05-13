@@ -53,7 +53,7 @@ class CardMedDB:
         return [{**session, "_id": str(session["_id"])} for session in data]
 
     def getConfigurationByModelCompany(self, model,company):
-        data = self.db.cardmed_configuration.find({"model": str(model),"company":str(company)})
+        data = self.db.cardmed_configuration.find({"models": str(model),"company":str(company)})
         return [{**session, "_id": str(session["_id"])} for session in data]
 
     def getDataByTime(self,starttime,endtime,configuration):

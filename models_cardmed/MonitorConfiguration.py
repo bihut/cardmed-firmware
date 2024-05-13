@@ -2,7 +2,7 @@ class MonitorConfiguration:
     TAG_OUTPUT="type_output"
     TAG_LANGUAGE="language"
     TAG_COMPANY="company"
-    TAG_MODEL="model"
+    TAG_MODEL="models"
     TAG_CUSTOMLABEL="custom_label"
     TAG_PARAMETERS="parameters"
     TAG_PARAMETER_TAG="tag"

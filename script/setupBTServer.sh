@@ -9,3 +9,6 @@
 #---------
 #1) Descargar github.com/mengguang/pi-ble-uart-server
 #2) Hacer el dispositivo discoverable --> sudo hciconfig hciX piscan
+
+
+#sudo apt install sqlite3 
