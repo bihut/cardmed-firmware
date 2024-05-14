@@ -251,7 +251,7 @@ class HeartRateService(Service):
     HR_UUID = '0000180d-0000-1000-8000-00805f9b34fb'
 
     def __init__(self, bus, index):
-        Service.__init__(self, bus, index, "HEARTRATESERVICE", True)
+        Service.__init__(self, bus, index, self.HR_UUID, True)
         self.add_characteristic(HeartRateMeasurementChrc(bus, 0, self))
         self.add_characteristic(BodySensorLocationChrc(bus, 1, self))
         self.add_characteristic(HeartRateControlPointChrc(bus, 2, self))
@@ -630,8 +630,9 @@ def gatt_server_main(mainloop, bus, adapter_name):
 
 ##-------------------New services and characteristics-------------------##
 class WifiService(Service):
+    WIFI_UUID = '0000180A-0000-1000-8000-00805F9B34FB'
     def __init__(self, bus, index):
-        Service.__init__(self, bus, index, "0000180A-0000-1000-8000-00805F9B34FB", True)
+        Service.__init__(self, bus, index, WifiService.WIFI_UUID, True)
         self.add_characteristic(ConnectWifiCharacteristic(bus, 0, self))
         self.add_characteristic(DisableWifiCharacteristic(bus, 1, self))
         self.add_characteristic(EnableWifiCharacteristic(bus, 2, self))
