@@ -5,8 +5,8 @@ import dbus.mainloop.glib
 import dbus.service
 import functools
 
-import exceptions
-import adapters
+from BTServer import exceptions
+from BTServer import adapters
 
 
 BLUEZ_SERVICE_NAME = 'org.bluez'
