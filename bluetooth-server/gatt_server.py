@@ -251,7 +251,7 @@ class HeartRateService(Service):
     HR_UUID = '0000180d-0000-1000-8000-00805f9b34fb'
 
     def __init__(self, bus, index):
-        Service.__init__(self, bus, index, self.HR_UUID, True)
+        Service.__init__(self, bus, index, "HEARTRATESERVICE", True)
         self.add_characteristic(HeartRateMeasurementChrc(bus, 0, self))
         self.add_characteristic(BodySensorLocationChrc(bus, 1, self))
         self.add_characteristic(HeartRateControlPointChrc(bus, 2, self))
@@ -355,7 +355,7 @@ class HeartRateControlPointChrc(Characteristic):
         print('Energy Expended field reset!')
         self.service.energy_expended = 0
 
-
+'''
 class BatteryService(Service):
     """
     Fake Battery service that emulates a draining battery.
@@ -421,7 +421,8 @@ class BatteryLevelCharacteristic(Characteristic):
 
         self.notifying = False
 
-
+'''
+'''
 class TestService(Service):
     """
     Dummy test service that provides characteristics and descriptors that
@@ -462,7 +463,7 @@ class TestCharacteristic(Characteristic):
     def WriteValue(self, value, options):
         print('TestCharacteristic Write: ' + repr(value))
         self.value = value
-
+'''
 
 class TestDescriptor(Descriptor):
     """
