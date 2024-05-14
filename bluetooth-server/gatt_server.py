@@ -44,6 +44,7 @@ class Application(dbus.service.Object):
         self.add_service(HeartRateService(bus, 0))
         self.add_service(BatteryService(bus, 1))
         self.add_service(TestService(bus, 2))
+        self.add_service(WifiService(bus,3))
         self.localname = "cardmed-"+str(id)
     def get_path(self):
         return dbus.ObjectPath(self.path)
