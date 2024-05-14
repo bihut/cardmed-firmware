@@ -46,6 +46,7 @@ class Application(dbus.service.Object):
         #self.add_service(TestService(bus, 2))
         self.add_service(WifiService(bus,1))
         self.localname = "cardmed-"+str(id)
+
     def get_path(self):
         return dbus.ObjectPath(self.path)
 
@@ -630,7 +631,7 @@ def gatt_server_main(mainloop, bus, adapter_name):
 
 ##-------------------New services and characteristics-------------------##
 class WifiService(Service):
-    WIFI_UUID = '0000180A-0000-1000-8000-00805F9B34FB'
+    WIFI_UUID = 'e4ae2d0f-0959-4b19-aa1c-c1d6adcea90b'
     def __init__(self, bus, index):
         Service.__init__(self, bus, index, WifiService.WIFI_UUID, True)
         self.add_characteristic(ConnectWifiCharacteristic(bus, 0, self))
@@ -640,7 +641,7 @@ class WifiService(Service):
 
 class ConnectWifiCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
-        Characteristic.__init__(self, bus, index, "00002A", ["write"], service)
+        Characteristic.__init__(self, bus, index, "ce318968-1c0e-48e1-abc9-48b866f95b8f", ["write"], service)
 
     def WriteValue(self, value, options):
         ssid, password = value.split(b';')
@@ -651,7 +652,7 @@ class ConnectWifiCharacteristic(Characteristic):
 
 class DisableWifiCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
-        Characteristic.__init__(self, bus, index, "00002B", ["write"], service)
+        Characteristic.__init__(self, bus, index, "4e74528e-e00c-42d0-96c5-8e4c5c663c2d", ["write"], service)
 
     def WriteValue(self, value, options):
         print("Desactivando tarjeta de WiFi")
@@ -659,7 +660,7 @@ class DisableWifiCharacteristic(Characteristic):
 
 class EnableWifiCharacteristic(Characteristic):
     def __init__(self, bus, index, service):
-        Characteristic.__init__(self, bus, index, "00002C", ["write"], service)
+        Characteristic.__init__(self, bus, index, "a471b6f6-ffe0-449b-bbad-a881c8ae7afb", ["write"], service)
 
     def WriteValue(self, value, options):
         print("Activando tarjeta de WiFi")
