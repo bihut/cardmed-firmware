@@ -33,6 +33,7 @@ GATT_SERVICE_IFACE = 'org.bluez.GattService1'
 GATT_CHRC_IFACE =    'org.bluez.GattCharacteristic1'
 GATT_DESC_IFACE =    'org.bluez.GattDescriptor1'
 LOCAL_NAME = "cardmed-"
+PIN_CODE="7777"
 
 
 class Application(dbus.service.Object):
@@ -48,6 +49,11 @@ class Application(dbus.service.Object):
         #self.add_service(TestService(bus, 2))
         self.add_service(WifiService(bus,1))
         self.localname = "cardmed-"+str(id)
+        self.pairing_code = PIN_CODE
+
+    @dbus.service.method('org.bluez.Adapter1')
+    def GetPairingCode(self):
+        return self.pairing_code
 
     def get_path(self):
         return dbus.ObjectPath(self.path)

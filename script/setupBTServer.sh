@@ -14,4 +14,16 @@
 #3) Hacer el dispositivo discoverable --> sudo hciconfig hciX piscan
 
 
+
+# antes de instalar depedencias
+#Open Terminal
+ #
+ #Run sudo nano /etc/pip.conf
+ #
+ #Add following line:
+ #
+ #[global]
+ #break-system-packages = true
+
+
 #sudo apt install sqlite3
