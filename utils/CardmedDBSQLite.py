@@ -119,6 +119,11 @@ class CardmedDBSQLite:
     def insertMonitorData(self, monitorData):
         query = "INSERT INTO "+CardmedDBSQLite.TABLE_MONITORDATA+" (created, configuration_id, att, val) VALUES (?, ?, ?, ?)"
         self.execute_query(query, (monitorData.created, monitorData.configuration_id, monitorData.att, monitorData.val))
+
+    def getAllMonitorDataByConfigurationID(self, configuration_id):
+        query = "SELECT * FROM "+CardmedDBSQLite.TABLE_MONITORDATA+" WHERE configuration_id = ?"
+        cursor = self.execute_query(query, (configuration_id,))
+        return cursor.fetchall()
 # Ejemplo de uso:
 if __name__ == "__main__":
     debug = True

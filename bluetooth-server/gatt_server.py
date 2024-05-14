@@ -626,3 +626,37 @@ def gatt_server_main(mainloop, bus, adapter_name):
                                     reply_handler=register_app_cb,
                                     error_handler=functools.partial(register_app_error_cb, mainloop))
 
+##-------------------New services and characteristics-------------------##
+class WifiService(Service):
+    def __init__(self, bus, index):
+        Service.__init__(self, bus, index, "0000180A-0000-1000-8000-00805F9B34FB", True)
+        self.add_characteristic(ConnectWifiCharacteristic(bus, 0, self))
+        self.add_characteristic(DisableWifiCharacteristic(bus, 1, self))
+        self.add_characteristic(EnableWifiCharacteristic(bus, 2, self))
+
+
+class ConnectWifiCharacteristic(Characteristic):
+    def __init__(self, bus, index, service):
+        Characteristic.__init__(self, bus, index, "00002A", ["write"], service)
+
+    def WriteValue(self, value, options):
+        ssid, password = value.split(b';')
+        ssid = ssid.decode()
+        password = password.decode()
+        print(f"Conectando a la red WiFi: {ssid} con contraseña: {password}")
+
+
+class DisableWifiCharacteristic(Characteristic):
+    def __init__(self, bus, index, service):
+        Characteristic.__init__(self, bus, index, "00002B", ["write"], service)
+
+    def WriteValue(self, value, options):
+        print("Desactivando tarjeta de WiFi")
+
+
+class EnableWifiCharacteristic(Characteristic):
+    def __init__(self, bus, index, service):
+        Characteristic.__init__(self, bus, index, "00002C", ["write"], service)
+
+    def WriteValue(self, value, options):
+        print("Activando tarjeta de WiFi")

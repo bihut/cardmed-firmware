@@ -4,11 +4,14 @@
 #systemctl status hciuart.service
 #el código bueno está en la carpeta /bluetooth/pi-ble-uart-server (hay que tocar el código para hacer pruebas de servicios)
 #! /bin/bash
-#hacer freeze en el terminal a ver las dependencias y apt list --installed
+
 #sudo hciconfig hci0 leadv 0
 #---------
-#1) Descargar github.com/mengguang/pi-ble-uart-server
-#2) Hacer el dispositivo discoverable --> sudo hciconfig hciX piscan
+#0 - opcional-) instalar librerías (sudo apt-get install libbluetooth-dev libboost-python-dev libboost-thread-dev libglib2.0-dev python-dev
+#sudo pip install gattlib)
+#1) sudo nano /etc/systemd/system/dbus-org.bluez.service --> ExecStart=/usr/lib/bluetooth/bluetoothd -E
+#2) Descargar github.com/mengguang/pi-ble-uart-server
+#3) Hacer el dispositivo discoverable --> sudo hciconfig hciX piscan
 
 
-#sudo apt install sqlite3 
+#sudo apt install sqlite3
