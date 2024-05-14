@@ -8,6 +8,8 @@ import array
 
 import functools
 
+from services import services
+
 try:
   from gi.repository import GObject
 except ImportError:
@@ -631,9 +633,10 @@ def gatt_server_main(mainloop, bus, adapter_name):
 
 ##-------------------New services and characteristics-------------------##
 class WifiService(Service):
+
     WIFI_UUID = 'e4ae2d0f-0959-4b19-aa1c-c1d6adcea90b'
     def __init__(self, bus, index):
-        Service.__init__(self, bus, index, WifiService.WIFI_UUID, True)
+        Service.__init__(self, bus, index, self.WIFI_UUID, True)
         self.add_characteristic(ConnectWifiCharacteristic(bus, 0, self))
         self.add_characteristic(DisableWifiCharacteristic(bus, 1, self))
         self.add_characteristic(EnableWifiCharacteristic(bus, 2, self))
@@ -655,6 +658,7 @@ class DisableWifiCharacteristic(Characteristic):
         Characteristic.__init__(self, bus, index, "4e74528e-e00c-42d0-96c5-8e4c5c663c2d", ["write"], service)
 
     def WriteValue(self, value, options):
+        services.Services.turnOffWifi()
         print("Desactivando tarjeta de WiFi")
 
 
@@ -663,4 +667,5 @@ class EnableWifiCharacteristic(Characteristic):
         Characteristic.__init__(self, bus, index, "a471b6f6-ffe0-449b-bbad-a881c8ae7afb", ["write"], service)
 
     def WriteValue(self, value, options):
+        services.Services.turnOnWifi()
         print("Activando tarjeta de WiFi")
