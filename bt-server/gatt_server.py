@@ -631,7 +631,7 @@ def gatt_server_main(mainloop, bus, adapter_name):
                                     reply_handler=register_app_cb,
                                     error_handler=functools.partial(register_app_error_cb, mainloop))
 
-##-------------------New services and characteristics-------------------##
+##-------------------New servicesb and characteristics-------------------##
 class WifiService(Service):
 
     WIFI_UUID = 'e4ae2d0f-0959-4b19-aa1c-c1d6adcea90b'

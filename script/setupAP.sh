@@ -806,8 +806,8 @@ doAddRcLocalNetStartSetup
 
 doAddApIpEntriesToHostFile
 
-# Disable regular network services:
-# The netStart script handles starting up network services in a certain order and time frame. Disabling them here makes sure things are not run at system startup.
+# Disable regular network servicesb:
+# The netStart script handles starting up network servicesb in a certain order and time frame. Disabling them here makes sure things are not run at system startup.
 systemctl unmask hostapd
 
 cat > $netStopFile <<EOF
