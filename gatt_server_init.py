@@ -8,6 +8,7 @@ try:
   from gi.repository import GObject
 except ImportError:
   import gobject as GObject
+
 from BTServer import advertising
 from BTServer import gatt_server
 import argparse

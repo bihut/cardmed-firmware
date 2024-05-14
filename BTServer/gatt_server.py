@@ -17,8 +17,8 @@ except ImportError:
 
 from random import randint
 
-import exceptions
-import adapters
+from BTServer import exceptions
+from BTServer import adapters
 
 BLUEZ_SERVICE_NAME = 'org.bluez'
 LE_ADVERTISING_MANAGER_IFACE = 'org.bluez.LEAdvertisingManager1'
