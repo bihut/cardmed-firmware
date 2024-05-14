@@ -8,7 +8,8 @@ import array
 
 import functools
 
-from services import services
+import Services
+from Services import services
 
 try:
   from gi.repository import GObject
@@ -658,7 +659,7 @@ class DisableWifiCharacteristic(Characteristic):
         Characteristic.__init__(self, bus, index, "4e74528e-e00c-42d0-96c5-8e4c5c663c2d", ["write"], service)
 
     def WriteValue(self, value, options):
-        services.Services.turnOffWifi()
+        Services.services.Services.turnOffWifi()
         print("Desactivando tarjeta de WiFi")
 
 
@@ -667,5 +668,5 @@ class EnableWifiCharacteristic(Characteristic):
         Characteristic.__init__(self, bus, index, "a471b6f6-ffe0-449b-bbad-a881c8ae7afb", ["write"], service)
 
     def WriteValue(self, value, options):
-        services.Services.turnOnWifi()
+        Services.services.Services.turnOnWifi()
         print("Activando tarjeta de WiFi")
