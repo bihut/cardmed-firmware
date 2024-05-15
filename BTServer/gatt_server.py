@@ -32,7 +32,7 @@ GATT_MANAGER_IFACE = 'org.bluez.GattManager1'
 GATT_SERVICE_IFACE = 'org.bluez.GattService1'
 GATT_CHRC_IFACE =    'org.bluez.GattCharacteristic1'
 GATT_DESC_IFACE =    'org.bluez.GattDescriptor1'
-LOCAL_NAME = "cardmed-"
+LOCAL_NAME = "vitalinsight-"
 PIN_CODE="7777"
 
 
@@ -76,6 +76,19 @@ class Application(dbus.service.Object):
                     response[desc.get_path()] = desc.get_properties()
 
         return response
+        # Función modificada para manejar la conexión
+
+    def handle_connection(self, device, handle, is_connected):
+        if is_connected:
+            print("Dispositivo conectado")
+
+            # Forzar el PIN deseado
+            device.exchange_security_request(pin=self.pairing_code)
+        else:
+            print("Dispositivo desconectado")
+
+            # Si se desconecta el dispositivo, forzar la reconexión con el PIN deseado
+            device.exchange_security_request(pin=self.pairing_code)
 
 
 class Service(dbus.service.Object):

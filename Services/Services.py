@@ -4,6 +4,7 @@ import subprocess
 
 import netifaces as netifaces
 #import pyiface as pyiface
+import qrcode
 
 
 class Services:
@@ -43,6 +44,20 @@ class Services:
         except subprocess.CalledProcessError:
             #print("Error al desconectar del WiFi")
             return False
+
+    @staticmethod
+    def generateQRCode(texto, nombre_archivo):
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=20,  # Aumenta el tamaño de la cuadrícula
+            border=10,  # Aumenta el tamaño del borde
+        )
+        qr.add_data(texto)
+        qr.make(fit=True)
+
+        imagen_qr = qr.make_image(fill_color="black", back_color="white")
+        imagen_qr.save(nombre_archivo)
 
     @staticmethod
     def turnOnWifi(iface="wlan0"):
